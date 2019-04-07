@@ -1,6 +1,11 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common'; 
+import { PlayerCardComponent } from './component/player-card.component';
 
 @NgModule({
-  declarations: [],
+  imports: [CommonModule],
+  declarations: [PlayerCardComponent],
+  exports: [PlayerCardComponent],
+  entryComponents: [PlayerCardComponent]
 })
 export class PitchPlayerCardModule { }
