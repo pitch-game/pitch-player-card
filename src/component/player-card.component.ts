@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Card } from 'src/models/card';
+import { Card } from '../models/card';
 import anime from 'animejs';
 
 var nextId = 0;

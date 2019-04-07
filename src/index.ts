@@ -9,3 +9,5 @@ import { PlayerCardComponent } from './component/player-card.component';
   entryComponents: [PlayerCardComponent]
 })
 export class PitchPlayerCardModule { }
+
+export { Card } from './models/card';

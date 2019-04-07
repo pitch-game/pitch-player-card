@@ -1,4 +1,3 @@
-
 export class Card {
     name: string;
     position: string;
