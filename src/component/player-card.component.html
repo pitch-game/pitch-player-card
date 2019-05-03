@@ -9,7 +9,9 @@
         <div class="shield cover absolute z-10"></div>
         <div class="shield {{card.rarity}}">
             <span class="position">{{card.position}}</span>
-            <span class="name">{{card.name}}</span>
+            <div class="name-container">
+                <span class="name" [fittext] [maxFontSize]="24">{{card.name}}</span>
+            </div>
             <span class="rating">{{card.rating}}</span>
         </div>
     </div>

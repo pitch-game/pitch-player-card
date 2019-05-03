@@ -4,6 +4,7 @@
   "peerDependencies": {
     "@angular/common": "^7.1.0",
     "@angular/core": "^7.1.0",
-    "animejs": "^3.0.0"
+    "animejs": "^3.0.0",
+    "angular-fittext": "^2.1.1"
   }
 }
