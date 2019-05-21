@@ -20,6 +20,7 @@ export class PlayerCardComponent implements OnInit {
     }
 
     click() {
+        //todo spin in loop until callback
         anime.timeline({
             loop: false
         })
