@@ -14,7 +14,7 @@ export class PlayerCardComponent implements OnInit {
     @Input() set card(value: Card) {
         this._card = value;
         if (value != null) {
-            this.revealCardAnimationInit();
+            this.reveal();
         }
     }
 
@@ -26,11 +26,9 @@ export class PlayerCardComponent implements OnInit {
 
     private spinning: any;
 
-    ngOnInit(): void {
+    ngOnInit(): void { }
 
-    }
-
-    revealCardAnimationInit() {
+    reveal() {
         if(this.spinning)
             this.spinning.pause();
         return anime.timeline({
@@ -43,7 +41,7 @@ export class PlayerCardComponent implements OnInit {
             .add({ targets: [`#${this.id} .name`], opacity: [{ value: 100, duration: 1000 }] }, '+=500');
     }
 
-    spinCardAnimationInit() {
+    open() {
         return anime.timeline({
             loop: false
         })
@@ -53,23 +51,23 @@ export class PlayerCardComponent implements OnInit {
             .add({ targets: [`#${this.id} .ribbon-right`], translateX: [{ value: 250, duration: 500 }], opacity: [{ value: 0, duration: 1000 }], easing: 'linear' }, 100)
             .add({ targets: [`#${this.id} .ribbon-top`], translateY: [{ value: -250, duration: 750 }], opacity: [{ value: 0, duration: 750 }], easing: 'linear' }, 200)
             .add({ targets: [`#${this.id} .ribbon-bottom`], translateY: [{ value: 250, duration: 750 }], opacity: [{ value: 0, duration: 750 }], easing: 'linear' }, 200)
-            .add({ targets: [`#${this.id} .ribbon`], opacity: [{ value: 0, duration: 1 }], easing: 'linear' }, 200)
-            .add({ targets: [`#${this.id} .player`], rotateY: [{ value: 2520, duration: 4000 }], easing: 'easeOutCubic' }, 500)
+            .add({ targets: [`#${this.id} .ribbon`], opacity: [{ value: 0, duration: 100 }], easing: 'linear' }, 200)
+            //.add({ targets: [`#${this.id} .player`], rotateY: [{ value: 2520, duration: 4000 }], easing: 'easeOutCubic' }, 500)
     }
 
-    keepSpinning() {
+    spin() {
         this.spinning = anime.timeline({
             loop: true
         })
-            .add({ targets: [`#${this.id} .player`], rotateY: [{ value: 5040, duration: 4000 }], easing: 'easeOutCubic' });
+            .add({ targets: [`#${this.id} .player`], rotateY: [{ value: 2520, duration: 4000 }], easing: 'easeOutCubic' });
     }
 
     click() {
-        this.spinCardAnimationInit().finished.then(() => {
+        this.open().finished.then(() => {
             if (this.card != null) { //todo wait on spin
-                this.revealCardAnimationInit();
+                this.reveal();
             } else {
-                this.keepSpinning();
+                this.spin();
             }
         });
     }
