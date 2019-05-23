@@ -15,12 +15,13 @@
     clip-path: polygon(50% 0%, 93% 19%, 85% 86%, 50% 100%, 15% 86%, 7% 19%);
     overflow:hidden;
     position:relative;
+    width: 140px;
+    height: 140px;
 }
 
 .ribbon {
   position:absolute;
-  background: #eee;  /* fallback for old browsers */
-
+  background: #abbaab;  /* fallback for old browsers */
   display:block;
   opacity:90;
   z-index:99;
@@ -30,7 +31,7 @@
     height: 0;
     border-style: solid;
     border-width: 15px 0 15px 26.0px;
-    border-color: transparent transparent transparent #eee;
+    border-color: transparent transparent transparent #a0b1a0;
     background-color:transparent;
     top:15px;
     left:50px;
@@ -42,7 +43,7 @@
     height: 0;
     border-style: solid;
     border-width: 15px 26.0px 15px 0;
-    border-color: transparent #eee transparent transparent;
+    border-color: transparent #a0b1a0 transparent transparent;
     background-color:transparent;
     top:15px;
     left:63px;
@@ -84,7 +85,6 @@
     display: block;
     text-align: center;
 
-
       .name,
       .rating,
       .position {
@@ -106,14 +106,17 @@
     }
 
     .name-container {
-      margin: 0px 16px;
+      margin-top:15px;
+      width: 100px;
+      margin-left: 20px;
+      height:30px;
     }
   
     .rating {
       display: block;
       position: relative;
       font-size: 45px;
-      margin-top:10px;
+      margin-top:5px;
     }
   
     &.gold {
@@ -133,10 +136,11 @@
     }
 
     &.cover {
-      // background: linear-gradient(whitesmoke, lightgrey) !important;
-      background: #D3CCE3;  /* fallback for old browsers */
-      background: -webkit-linear-gradient(to right, #E9E4F0, #D3CCE3);  /* Chrome 10-25, Safari 5.1-6 */
-      background: linear-gradient(to right, #E9E4F0, #D3CCE3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+      background: #abbaab;  /* fallback for old browsers */
+      background: -webkit-linear-gradient(to left, #d6ddd6, #abbaab);  /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to left, #d6ddd6, #abbaab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      
     }
 
     

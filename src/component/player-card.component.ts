@@ -24,16 +24,20 @@ export class PlayerCardComponent implements OnInit {
 
     id = `pitch-player-${nextId++}`;
 
+    private spinning: any;
+
     ngOnInit(): void {
 
     }
 
     revealCardAnimationInit() {
+        if(this.spinning)
+            this.spinning.pause();
         return anime.timeline({
             loop: false
         })
-            .add({ targets: [`#${this.id} .player`], rotateY: [{ value: 2520, duration: 4000 }], easing: 'easeOutCubic' }, 500) //todo stop spin
-            .add({ targets: [`#${this.id} .cover`], opacity: [{ value: 0, duration: 3000 }], easing: 'linear' }, 1000)
+            .add({ targets: [`#${this.id} .player`], rotateY: [{ value: 2520, duration: 4000 }], easing: 'easeOutCubic' }, 0) //todo stop spin
+            .add({ targets: [`#${this.id} .cover`], opacity: [{ value: 0, duration: 3000 }], easing: 'linear' }, 0)
             .add({ targets: [`#${this.id} .position`], opacity: [{ value: 100, duration: 1000 }] }, '+=150')
             .add({ targets: [`#${this.id} .rating`], opacity: [{ value: 100, duration: 1000 }] }, '+=150')
             .add({ targets: [`#${this.id} .name`], opacity: [{ value: 100, duration: 1000 }] }, '+=500');
@@ -49,15 +53,15 @@ export class PlayerCardComponent implements OnInit {
             .add({ targets: [`#${this.id} .ribbon-right`], translateX: [{ value: 250, duration: 500 }], opacity: [{ value: 0, duration: 1000 }], easing: 'linear' }, 100)
             .add({ targets: [`#${this.id} .ribbon-top`], translateY: [{ value: -250, duration: 750 }], opacity: [{ value: 0, duration: 750 }], easing: 'linear' }, 200)
             .add({ targets: [`#${this.id} .ribbon-bottom`], translateY: [{ value: 250, duration: 750 }], opacity: [{ value: 0, duration: 750 }], easing: 'linear' }, 200)
-            .add({ targets: [`#${this.id} .ribbon`], opacity: [{ value: 0, duration: 1 }], easing: 'linear' }, 1000)
+            .add({ targets: [`#${this.id} .ribbon`], opacity: [{ value: 0, duration: 1 }], easing: 'linear' }, 200)
             .add({ targets: [`#${this.id} .player`], rotateY: [{ value: 2520, duration: 4000 }], easing: 'easeOutCubic' }, 500)
     }
 
     keepSpinning() {
-            anime.timeline({
-                loop: true
-            })
-                .add({ targets: [`#${this.id} .player`], rotateY: [{ value: 2520, duration: 4000 }], easing: 'easeOutCubic' }, 500);
+        this.spinning = anime.timeline({
+            loop: true
+        })
+            .add({ targets: [`#${this.id} .player`], rotateY: [{ value: 5040, duration: 4000 }], easing: 'easeOutCubic' });
     }
 
     click() {

@@ -8,11 +8,13 @@
         <div class="ribbon ribbon-bottom"></div>
         <div class="shield cover absolute z-10"></div>
         <div class="shield {{card?.rarity}}">
-            <span class="position">{{card?.position}}</span>
-            <div class="name-container">
-                <span class="name" [fittext] [maxFontSize]="24">{{card?.name}}</span>
+            <div *ngIf="card">
+                <span class="position">{{card?.position}}</span>
+                <div class="name-container">
+                    <span class="name" [fittext] [maxFontSize]="24">{{card?.name}}</span>
+                </div>
+                <span class="rating">{{card?.rating}}</span>
             </div>
-            <span class="rating">{{card?.rating}}</span>
         </div>
     </div>
 </div>

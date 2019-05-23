@@ -9,5 +9,10 @@ import { Card } from 'src';
 export class AppComponent {
   title = 'demo';
   card: Card = { name: 'Ozil', rating: 78, position: 'ST', opened: true, rarity: 'gold' };
-  card2: Card = { name: 'Alexander-Arnold', rating: 78, position: 'ST', opened: true, rarity: 'gold' };
+  emptyCard: Card;
+
+  click(){
+    console.log('click did nothing')
+    this.emptyCard = { name: 'Alexander-Arnold', rating: 78, position: 'ST', opened: true, rarity: 'gold' };
+  }
 }
