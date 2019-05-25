@@ -22,49 +22,56 @@ export class PlayerCardComponent implements OnInit {
         return this._card;
     }
 
+    @Input()
+    size: string = "md";
+
+    private opened: boolean;
+
     id = `pitch-player-${nextId++}`;
 
     private spinning: any;
 
-    ngOnInit(): void { }
+    ngOnInit(): void {
+        this.opened = this.card != null;
+    }
 
     reveal() {
-        if(this.spinning)
+        if (this.spinning)
             this.spinning.pause();
-        return anime.timeline({
+        anime.timeline({
             loop: false
         })
-            .add({ targets: [`#${this.id} .player`], rotateY: [{ value: 2520, duration: 4000 }], easing: 'easeOutCubic' }, 0) //todo stop spin
+            .add({ targets: [`#${this.id}.player`], rotateY: [{ value: 2520, duration: 4000 }], easing: 'easeOutCubic' }, 0) //todo stop spin
             .add({ targets: [`#${this.id} .cover`], opacity: [{ value: 0, duration: 3000 }], easing: 'linear' }, 0)
-            .add({ targets: [`#${this.id} .position`], opacity: [{ value: 100, duration: 1000 }] }, '+=150')
-            .add({ targets: [`#${this.id} .rating`], opacity: [{ value: 100, duration: 1000 }] }, '+=150')
-            .add({ targets: [`#${this.id} .name`], opacity: [{ value: 100, duration: 1000 }] }, '+=500');
+            .finished.then(() => {
+                //race condition
+                anime.timeline({
+                    loop: false
+                })
+                    .add({ targets: [`#${this.id} .position`], opacity: [{ value: 100, duration: 1000 }] }, 0)
+                    .add({ targets: [`#${this.id} .rating`], opacity: [{ value: 100, duration: 1000 }] }, '+=150')
+                    .add({ targets: [`#${this.id} .name`], opacity: [{ value: 100, duration: 1000 }] }, '+=500')
+            });
     }
 
     open() {
         return anime.timeline({
             loop: false
         })
-            .add({ targets: [`#${this.id} .bow-left`], translateY: [{ value: -250, duration: 500 }], opacity: [{ value: 0, duration: 250 }], easing: 'linear' }, 0)
-            .add({ targets: [`#${this.id} .bow-right`], translateY: [{ value: -250, duration: 500 }], opacity: [{ value: 0, duration: 250 }], easing: 'linear' }, 0)
-            .add({ targets: [`#${this.id} .ribbon-left`], translateX: [{ value: -250, duration: 500 }], opacity: [{ value: 0, duration: 1000 }], easing: 'linear' }, 100)
-            .add({ targets: [`#${this.id} .ribbon-right`], translateX: [{ value: 250, duration: 500 }], opacity: [{ value: 0, duration: 1000 }], easing: 'linear' }, 100)
-            .add({ targets: [`#${this.id} .ribbon-top`], translateY: [{ value: -250, duration: 750 }], opacity: [{ value: 0, duration: 750 }], easing: 'linear' }, 200)
-            .add({ targets: [`#${this.id} .ribbon-bottom`], translateY: [{ value: 250, duration: 750 }], opacity: [{ value: 0, duration: 750 }], easing: 'linear' }, 200)
-            .add({ targets: [`#${this.id} .ribbon`], opacity: [{ value: 0, duration: 100 }], easing: 'linear' }, 200)
-            //.add({ targets: [`#${this.id} .player`], rotateY: [{ value: 2520, duration: 4000 }], easing: 'easeOutCubic' }, 500)
+            .add({ targets: [`#${this.id} .ribbon`], translateX: [{ value: -250, duration: 150 }], opacity: [{ value: 0, duration: 100 }], easing: 'linear' }, 0)
+            .add({ targets: [`#${this.id} .ribbon`], opacity: [{ value: 0, duration: 150 }], easing: 'linear' }, 0)
     }
 
     spin() {
         this.spinning = anime.timeline({
             loop: true
         })
-            .add({ targets: [`#${this.id} .player`], rotateY: [{ value: 2520, duration: 4000 }], easing: 'easeOutCubic' });
+            .add({ targets: [`#${this.id}.player`], rotateY: [{ value: 2520, duration: 4000 }], easing: 'easeOutCubic' });
     }
 
     click() {
         this.open().finished.then(() => {
-            if (this.card != null) { //todo wait on spin
+            if (this.card != null) {
                 this.reveal();
             } else {
                 this.spin();

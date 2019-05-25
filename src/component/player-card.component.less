@@ -1,3 +1,5 @@
+:host { display:inline-block; }
+
 .gradient-animation(@start, @end) {
     background-size: 100%;
     background-image: -webkit-linear-gradient(@start, @end);
@@ -11,78 +13,101 @@
 .player {
     cursor: pointer;
     display: inline-block;
-    -webkit-clip-path: polygon(50% 0%, 93% 19%, 85% 86%, 50% 100%, 15% 86%, 7% 19%);
-    clip-path: polygon(50% 0%, 93% 19%, 85% 86%, 50% 100%, 15% 86%, 7% 19%);
     overflow:hidden;
     position:relative;
-    width: 140px;
-    height: 140px;
+    -webkit-clip-path: polygon(50% 0%, 93% 19%, 85% 86%, 50% 100%, 15% 86%, 7% 19%);
+    clip-path: polygon(50% 0%, 93% 19%, 85% 86%, 50% 100%, 15% 86%, 7% 19%);
+
+    &.sm {
+      width: 90px;
+      height: 90px;
+
+      .shield {
+        width: 90px;
+        height: 90px;
+      }
+    }
+
+    &.md {
+      width: 140px;
+      height: 140px;
+
+      .shield {
+        width: 140px;
+        height: 140px;
+      }
+    }
+
+    &.lg {
+      width: 200px;
+      height: 200px;
+
+      .shield {
+        width: 200px;
+        height: 200px;
+      }
+    }
+
+    .text-container {
+      margin-top:10%;
+      height: 100%;
+      width:100%;
+    }
+
+    .position {
+      margin-top: 10%;
+      width: 20%;
+      margin: 0 auto;
+      white-space: nowrap;
+    }
+
+    .name {
+      width: 60%;
+      height: 30%;
+      margin: 0 auto;
+      white-space: nowrap;
+      display: flex;
+      justify-content: center;
+      align-items: center; 
+    }
+
+    .rating {
+      width: 40%;
+      margin: 0 auto;
+      white-space: nowrap;
+      bottom: 5%;
+      position: absolute;
+      text-align: center;
+      left: 30%;
+    }
+
 }
+
 
 .ribbon {
   position:absolute;
-  background: #abbaab;  /* fallback for old browsers */
-  display:block;
-  opacity:90;
-  z-index:99;
+  top: 30%;
+  width:100%;
+  background-color: darken(#abbaab , 10%);
+  height: 30%;
+  z-index: 100;
+  text-align:center;
+  -webkit-box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.45);
+  -moz-box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.45);
+  box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center; 
 
-  &.bow-left {
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 15px 0 15px 26.0px;
-    border-color: transparent transparent transparent #a0b1a0;
-    background-color:transparent;
-    top:15px;
-    left:50px;
-    z-index:9999;
-  }
-
-  &.bow-right {
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 15px 26.0px 15px 0;
-    border-color: transparent #a0b1a0 transparent transparent;
-    background-color:transparent;
-    top:15px;
-    left:63px;
-    z-index:9999;
-  }
-
-  &.ribbon-left {
-    top:20px;
-    width:60px;
-    height:20px;
-  }
-
-  &.ribbon-right {
-    top:20px;
-    width:50px;
-    height:20px;
-    left:80px;
-  }
-
-  &.ribbon-top {
-    width:20px;
-    height:50px;
-    left:60px;
-  }
-
-  &.ribbon-bottom {
-    width:20px;
-    height:90px;
-    left:60px;
-    top:50px
+  div {
+    padding:10px;
   }
 }
 
+
 .shield {
     user-select: none;
-    display: inline-block !important;
-    width: 140px;
-    height: 140px;
-    display: block;
+    display: inline-block;
     text-align: center;
 
       .name,
@@ -90,34 +115,14 @@
       .position {
         opacity: 0;
       }
-  
-    .position {
-      margin-top: 15px;
-      display: block;
-      position: relative;
-      font-size: 14px;
-    }
-  
-    .name {
-      font-size: 24px;
-      margin-top: 14px;
-      display: block;
-      position: relative;
-    }
 
-    .name-container {
-      margin-top:15px;
-      width: 100px;
-      margin-left: 20px;
-      height:30px;
-    }
-  
-    .rating {
-      display: block;
-      position: relative;
-      font-size: 45px;
-      margin-top:5px;
-    }
+      &.opened {
+        .name,
+        .rating,
+        .position {
+          opacity: 100;
+        }
+      }
   
     &.gold {
       //background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
@@ -136,11 +141,9 @@
     }
 
     &.cover {
-
       background: #abbaab;  /* fallback for old browsers */
       background: -webkit-linear-gradient(to left, #d6ddd6, #abbaab);  /* Chrome 10-25, Safari 5.1-6 */
       background: linear-gradient(to left, #d6ddd6, #abbaab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-      
     }
 
     

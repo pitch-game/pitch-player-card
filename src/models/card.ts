@@ -3,5 +3,4 @@ export class Card {
     position: string;
     rating: number;
     rarity: string;
-    opened: boolean;
 }

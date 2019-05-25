@@ -1,19 +1,20 @@
-<div [id]="id" class="text-center py-4 lg:px-4">
-    <div (click)="click()" class="player">
-        <div class="ribbon bow-left"></div>
-        <div class="ribbon bow-right"></div>
-        <div class="ribbon ribbon-left"></div>
-        <div class="ribbon ribbon-top"></div>
-        <div class="ribbon ribbon-right"></div>
-        <div class="ribbon ribbon-bottom"></div>
+<div [id]="id" (click)="click()" class="player" [ngClass]="size">
+    <div *ngIf="!opened">
+        <div class="ribbon">
+            <div fittext [maxFontSize]="40">Regular Pack</div>
+        </div>
         <div class="shield cover absolute z-10"></div>
-        <div class="shield {{card?.rarity}}">
-            <div *ngIf="card">
-                <span class="position">{{card?.position}}</span>
-                <div class="name-container">
-                    <span class="name" [fittext] [maxFontSize]="24">{{card?.name}}</span>
-                </div>
-                <span class="rating">{{card?.rating}}</span>
+    </div>
+    <div class="shield {{card?.rarity}}" [ngClass]="{'opened' : opened}">
+        <div class="text-container" *ngIf="card">
+            <div class="position">
+                <div fittext>{{card?.position}}</div>
+            </div>
+            <div class="name">
+                <div fittext [maxFontSize]="36">{{card?.name}}</div>
+            </div>
+            <div class="rating">
+                <div fittext>{{card?.rating}}</div>
             </div>
         </div>
     </div>
