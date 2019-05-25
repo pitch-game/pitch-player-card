@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { Card } from '../models/card';
 import anime from 'animejs';
 
@@ -8,7 +8,12 @@ var nextId = 0;
     templateUrl: "player-card.component.html",
     styleUrls: ["player-card.component.less"]
 })
-export class PlayerCardComponent implements OnInit {
+export class PlayerCardComponent implements OnInit, AfterViewInit {
+    ngAfterViewInit(): void {
+        if (this.spinOnInit) {
+            this.click();
+        }
+    }
 
     private _card: Card;
     @Input() set card(value: Card) {
@@ -24,6 +29,8 @@ export class PlayerCardComponent implements OnInit {
 
     @Input()
     size: string = "md";
+    @Input()
+    spinOnInit: boolean;
 
     opened: boolean;
 
