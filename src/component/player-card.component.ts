@@ -25,7 +25,7 @@ export class PlayerCardComponent implements OnInit {
     @Input()
     size: string = "md";
 
-    private opened: boolean;
+    opened: boolean;
 
     id = `pitch-player-${nextId++}`;
 
