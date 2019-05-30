@@ -1,6 +1,6 @@
 <div [id]="id" (click)="click()" class="player" [ngClass]="size">
     <div *ngIf="!opened">
-        <div class="ribbon">
+        <div *ngIf="!(mode && mode == 'squad')" class="ribbon">
             <div fittext [maxFontSize]="40">Regular Pack</div>
         </div>
         <div class="shield cover absolute z-10"></div>

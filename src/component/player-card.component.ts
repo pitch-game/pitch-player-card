@@ -19,7 +19,11 @@ export class PlayerCardComponent implements OnInit, AfterViewInit {
     @Input() set card(value: Card) {
         this._card = value;
         if (value != null) {
-            this.reveal();
+            if(this.mode && this.mode == "squad"){
+                this.opened = true;
+            } else {
+                this.reveal();
+            }
         }
     }
 
@@ -31,6 +35,9 @@ export class PlayerCardComponent implements OnInit, AfterViewInit {
     size: string = "md";
     @Input()
     spinOnInit: boolean;
+
+    @Input()
+    mode: string;
 
     opened: boolean;
 

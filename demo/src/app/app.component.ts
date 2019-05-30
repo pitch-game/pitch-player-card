@@ -12,7 +12,6 @@ export class AppComponent {
   emptyCard: Card;
 
   click(){
-    console.log('click did nothing')
     this.emptyCard = { name: 'Trent A-A', rating: 78, position: 'ST', rarity: 'gold' };
   }
 }
