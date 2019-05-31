@@ -84,6 +84,7 @@ export class PlayerCardComponent implements OnInit, AfterViewInit {
     }
 
     click() {
+        if(this.opened || this.mode == "squad") return;
         this.open().finished.then(() => {
             if (this.card != null) {
                 this.reveal();
