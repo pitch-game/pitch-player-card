@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, OnChanges } from '@angular/core';
 import { Card } from '../models/card';
 import anime from 'animejs';
-import { Observable } from 'rxjs';
+import { Observable, isObservable } from 'rxjs';
 
 var nextId = 0;
 @Component({
@@ -9,7 +9,7 @@ var nextId = 0;
     templateUrl: "player-card.component.html",
     styleUrls: ["player-card.component.less"]
 })
-export class PlayerCardComponent implements OnInit, AfterViewInit {
+export class PlayerCardComponent implements OnInit, OnChanges, AfterViewInit {
 
     ngAfterViewInit(): void {
         if (this.spinOnInit) {
@@ -18,7 +18,7 @@ export class PlayerCardComponent implements OnInit, AfterViewInit {
     }
 
     @Input()
-    card: Observable<Card>;
+    card: Observable<Card> | Card;
     @Input()
     size: string = "md";
     @Input()
@@ -34,14 +34,23 @@ export class PlayerCardComponent implements OnInit, AfterViewInit {
     private spinning: any;
 
     ngOnInit(): void {
-        this.card.subscribe(cardModel => {
-            this.cardModel = cardModel;
-            if (this.mode && this.mode == "squad") {
-                this.opened = true;
-            } else {
-                this.reveal();
-            }
-        });
+        if (!isObservable(this.card)) {
+            this.opened = this.card != null;
+            this.cardModel = this.card;
+        } else {
+            this.card.subscribe(cardModel => {
+                this.cardModel = cardModel;
+                if (this.mode && this.mode == "squad") {
+                    this.opened = true;
+                } else {
+                    this.reveal();
+                }
+            });
+        }
+    }
+
+    ngOnChanges(changes: import("@angular/core").SimpleChanges): void {
+        this.ngOnInit();
     }
 
     reveal() {

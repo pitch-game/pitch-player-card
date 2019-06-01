@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   }
 
   title = 'demo';
-  card: Observable<Card> = of({ id: '', name: 'Mane', rating: 78, position: 'ST', rarity: 'gold' });
+  card: Card = { id: '', name: 'Mane', rating: 78, position: 'ST', rarity: 'gold' };
   updateObservable;
 
   emptyCard: Observable<Card>;
