@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { Card } from '../models/card';
 import anime from 'animejs';
+import { Observable } from 'rxjs';
 
 var nextId = 0;
 @Component({
@@ -9,44 +10,38 @@ var nextId = 0;
     styleUrls: ["player-card.component.less"]
 })
 export class PlayerCardComponent implements OnInit, AfterViewInit {
+
     ngAfterViewInit(): void {
         if (this.spinOnInit) {
             this.click();
         }
     }
 
-    private _card: Card;
-    @Input() set card(value: Card) {
-        this._card = value;
-        if (value != null) {
-            if(this.mode && this.mode == "squad"){
-                this.opened = true;
-            } else {
-                this.reveal();
-            }
-        }
-    }
-
-    get card(): Card {
-        return this._card;
-    }
-
+    @Input()
+    card: Observable<Card>;
     @Input()
     size: string = "md";
     @Input()
     spinOnInit: boolean;
-
     @Input()
     mode: string;
 
     opened: boolean;
+    cardModel: Card;
 
     id = `pitch-player-${nextId++}`;
 
     private spinning: any;
 
     ngOnInit(): void {
-        this.opened = this.card != null;
+        this.card.subscribe(cardModel => {
+            this.cardModel = cardModel;
+            if (this.mode && this.mode == "squad") {
+                this.opened = true;
+            } else {
+                this.reveal();
+            }
+        });
     }
 
     reveal() {
@@ -84,13 +79,7 @@ export class PlayerCardComponent implements OnInit, AfterViewInit {
     }
 
     click() {
-        if(this.opened || this.mode == "squad") return;
-        this.open().finished.then(() => {
-            if (this.card != null) {
-                this.reveal();
-            } else {
-                this.spin();
-            }
-        });
+        if (this.opened || this.mode == "squad") return;
+        this.open().finished.then(() => this.spin());
     }
 }

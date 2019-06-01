@@ -5,16 +5,16 @@
         </div>
         <div class="shield cover absolute z-10"></div>
     </div>
-    <div class="shield {{card?.rarity}}" [ngClass]="{'opened' : opened}">
-        <div class="text-container" *ngIf="card">
+    <div class="shield {{cardModel?.rarity}}" [ngClass]="{'opened' : opened}">
+        <div class="text-container" *ngIf="cardModel">
             <div class="position">
-                <div fittext>{{card?.position}}</div>
+                <div fittext>{{cardModel?.position}}</div>
             </div>
             <div class="name">
-                <div fittext [maxFontSize]="36">{{card?.name}}</div>
+                <div fittext [maxFontSize]="36">{{cardModel?.name}}</div>
             </div>
             <div class="rating">
-                <div fittext>{{card?.rating}}</div>
+                <div fittext>{{cardModel?.rating}}</div>
             </div>
         </div>
     </div>

@@ -1,17 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Card } from 'src';
+import { Observable, empty } from 'rxjs';
+import { of } from 'rxjs'
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'demo';
-  card: Card = { name: 'Mane', rating: 78, position: 'ST', rarity: 'gold' };
-  emptyCard: Card;
+export class AppComponent implements OnInit {
 
-  click(){
-    this.emptyCard = { name: 'Trent A-A', rating: 78, position: 'ST', rarity: 'gold' };
+  ngOnInit(): void {
+    this.emptyCard = Observable.create((observer) => {
+      this.updateObservable = (newValue) => {
+        observer.next(newValue);
+        observer.complete();
+      }
+    });
+  }
+
+  title = 'demo';
+  card: Observable<Card> = of({ id: '', name: 'Mane', rating: 78, position: 'ST', rarity: 'gold' });
+  updateObservable;
+
+  emptyCard: Observable<Card>;
+
+  click() {
+    this.updateObservable({ id: '', name: 'Trent A-A', rating: 78, position: 'ST', rarity: 'gold' });
   }
 }
