@@ -11,4 +11,4 @@ import { AngularFittextModule } from 'angular-fittext';
 })
 export class PitchPlayerCardModule { }
 
-export { Card } from './models/card';
+export { PitchPlayerCard as Card } from './models/pitch-player-card';

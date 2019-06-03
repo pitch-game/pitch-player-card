@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, OnChanges } from '@angular/core';
-import { Card } from '../models/card';
+import { PitchPlayerCard } from '../models/pitch-player-card';
 import anime from 'animejs';
 import { Observable, isObservable } from 'rxjs';
 
@@ -18,7 +18,7 @@ export class PlayerCardComponent implements OnInit, OnChanges, AfterViewInit {
     }
 
     @Input()
-    card: Observable<Card> | Card;
+    card: Observable<PitchPlayerCard> | PitchPlayerCard;
     @Input()
     size: string = "md";
     @Input()
@@ -27,7 +27,7 @@ export class PlayerCardComponent implements OnInit, OnChanges, AfterViewInit {
     mode: string;
 
     opened: boolean;
-    cardModel: Card;
+    cardModel: PitchPlayerCard;
 
     id = `pitch-player-${nextId++}`;
 

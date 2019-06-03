@@ -1,4 +1,4 @@
-export class Card {
+export class PitchPlayerCard {
     id: string;
     name: string;
     position: string;
