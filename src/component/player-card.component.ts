@@ -50,7 +50,10 @@ export class PlayerCardComponent implements OnInit, OnChanges, AfterViewInit {
     }
 
     ngOnChanges(changes: import("@angular/core").SimpleChanges): void {
-        this.ngOnInit();
+        if (!isObservable(this.card)) {
+            this.opened = this.card != null;
+            this.cardModel = this.card;
+        }
     }
 
     reveal() {
