@@ -98,4 +98,16 @@ export class PlayerCardComponent implements OnInit, OnChanges, AfterViewInit {
         if (this.opened || this.mode == "squad") return;
         this.open().finished.then(() => this.spin());
     }
+
+    maxFontSize():number {
+        switch (this.size) {
+            case "sm":
+                return 14
+            case "md":
+                return 18
+            case "lg":
+                return 28
+        }
+        return 12;
+    }
 }
