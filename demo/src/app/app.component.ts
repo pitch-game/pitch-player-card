@@ -18,6 +18,8 @@ export class AppComponent implements OnInit {
         observer.complete();
       }
     });
+
+    this.cardsTest['LB'] = null;
   }
 
   title = 'demo';
@@ -25,7 +27,11 @@ export class AppComponent implements OnInit {
   noCard: PitchPlayerCard;
   updateObservable;
 
+  cards: PitchPlayerCard[] = [];
+
   emptyCard: Observable<PitchPlayerCard>;
+
+  cardsTest: { [position: string]: PitchPlayerCard } = {};
 
   click() {
     this.updateObservable({ id: '', name: 'Trent A-A', rating: 78, position: 'ST', rarity: 'gold' });
@@ -33,5 +39,9 @@ export class AppComponent implements OnInit {
 
   click2() {
     this.noCard = new PitchPlayerCard('', 'Trent A-A', 'ST', 78, 'gold');
+  }
+
+  setnull(){
+    this.card = null;
   }
 }
