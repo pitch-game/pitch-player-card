@@ -31,9 +31,8 @@ export class PlayerCardComponent implements OnInit, OnChanges, AfterViewInit {
 
     id = `pitch-player-${nextId++}`;
 
-    private spinning: boolean;
     private revealing: boolean;
-    private spinningTl: any;
+    private spinningTimeline: any;
 
     ngOnInit(): void {
         if (!isObservable(this.card)) {
@@ -64,9 +63,8 @@ export class PlayerCardComponent implements OnInit, OnChanges, AfterViewInit {
     }
 
     reveal() {
-        if (this.spinningTl) {
-            this.spinningTl.pause();
-            this.spinning = false;
+        if (this.spinningTimeline) {
+            this.spinningTimeline.pause();
         }
         this.revealing = true;
         anime.timeline({
@@ -90,26 +88,20 @@ export class PlayerCardComponent implements OnInit, OnChanges, AfterViewInit {
     open() {
         return anime.timeline({
             loop: false
-        })
-            .add({ targets: [`#${this.id} .ribbon`], translateX: [{ value: -250, duration: 150 }], opacity: [{ value: 0, duration: 100 }], easing: 'linear' }, 0)
+        }).add({ targets: [`#${this.id} .ribbon`], translateX: [{ value: -250, duration: 150 }], opacity: [{ value: 0, duration: 100 }], easing: 'linear' }, 0)
             .add({ targets: [`#${this.id} .ribbon`], opacity: [{ value: 0, duration: 150 }], easing: 'linear' }, 0)
     }
 
     spin() {
-        this.spinning = true;
-        this.spinningTl = anime.timeline({
+        this.spinningTimeline = anime.timeline({
             loop: true
-        })
-            .add({ targets: [`#${this.id}.player`], rotateY: [{ value: 2520, duration: 4000 }], easing: 'easeOutCubic' });
-        this.spinningTl.finished.then(() => {
-            this.spinning = false;
-        });
+        }).add({ targets: [`#${this.id}.player`], rotateY: [{ value: 2520, duration: 4000 }], easing: 'easeOutCubic' });
     }
 
     click() {
         if (this.opened || this.mode == "squad") return;
         this.open().finished.then(() => {
-            if(this.revealing || this.spinning) return;
+            if (this.revealing) return;
             this.spin();
         });
     }
