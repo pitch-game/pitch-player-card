@@ -107,8 +107,11 @@ export class PlayerCardComponent implements OnInit, OnChanges, AfterViewInit {
     }
 
     click() {
-        if (this.opened || this.mode == "squad" || this.spinning || this.revealing) return;
-        this.open().finished.then(() => this.spin());
+        if (this.opened || this.mode == "squad") return;
+        this.open().finished.then(() => {
+            if(this.revealing || this.spinning) return;
+            this.spin();
+        });
     }
 
     maxFontSize(): number {
