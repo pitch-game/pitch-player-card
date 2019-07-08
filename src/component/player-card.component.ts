@@ -31,7 +31,9 @@ export class PlayerCardComponent implements OnInit, OnChanges, AfterViewInit {
 
     id = `pitch-player-${nextId++}`;
 
-    private spinning: any;
+    private spinning: boolean;
+    private revealing: boolean;
+    private spinningTl: any;
 
     ngOnInit(): void {
         if (!isObservable(this.card)) {
@@ -51,6 +53,7 @@ export class PlayerCardComponent implements OnInit, OnChanges, AfterViewInit {
 
     ngOnChanges(changes: import("@angular/core").SimpleChanges): void {
         if (!isObservable(this.card)) {
+            if (!this.card) return;
             this.cardModel = this.card;
             if (this.mode && this.mode == "squad") {
                 this.opened = this.card != null;
@@ -61,12 +64,15 @@ export class PlayerCardComponent implements OnInit, OnChanges, AfterViewInit {
     }
 
     reveal() {
-        if (this.spinning)
-            this.spinning.pause();
+        if (this.spinningTl) {
+            this.spinningTl.pause();
+            this.spinning = false;
+        }
+        this.revealing = true;
         anime.timeline({
             loop: false
         })
-            .add({ targets: [`#${this.id}.player`], rotateY: [{ value: 2520, duration: 4000 }], easing: 'easeOutCubic' }, 0) //todo stop spin
+            .add({ targets: [`#${this.id}.player`], rotateY: [{ value: 2520, duration: 4000 }], easing: 'easeOutCubic' }, 0)
             .add({ targets: [`#${this.id} .cover`], opacity: [{ value: 0, duration: 3000 }], easing: 'linear' }, 0)
             .finished.then(() => {
                 //race condition
@@ -75,7 +81,9 @@ export class PlayerCardComponent implements OnInit, OnChanges, AfterViewInit {
                 })
                     .add({ targets: [`#${this.id} .position`], opacity: [{ value: 100, duration: 1000 }] }, 0)
                     .add({ targets: [`#${this.id} .rating`], opacity: [{ value: 100, duration: 1000 }] }, '+=150')
-                    .add({ targets: [`#${this.id} .name`], opacity: [{ value: 100, duration: 1000 }] }, '+=500')
+                    .add({ targets: [`#${this.id} .name`], opacity: [{ value: 100, duration: 1000 }] }, '+=500').finished.then(() => {
+                        this.revealing = false;
+                    })
             });
     }
 
@@ -88,18 +96,22 @@ export class PlayerCardComponent implements OnInit, OnChanges, AfterViewInit {
     }
 
     spin() {
-        this.spinning = anime.timeline({
+        this.spinning = true;
+        this.spinningTl = anime.timeline({
             loop: true
         })
             .add({ targets: [`#${this.id}.player`], rotateY: [{ value: 2520, duration: 4000 }], easing: 'easeOutCubic' });
+        this.spinningTl.finished.then(() => {
+            this.spinning = false;
+        });
     }
 
     click() {
-        if (this.opened || this.mode == "squad") return;
+        if (this.opened || this.mode == "squad" || this.spinning || this.revealing) return;
         this.open().finished.then(() => this.spin());
     }
 
-    maxFontSize():number {
+    maxFontSize(): number {
         switch (this.size) {
             case "sm":
                 return 14

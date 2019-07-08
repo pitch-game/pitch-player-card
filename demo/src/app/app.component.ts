@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
   cardsTest: { [position: string]: PitchPlayerCard } = {};
 
   click() {
-    this.updateObservable({ id: '', name: 'Trent A-A', rating: 78, position: 'ST', rarity: 'gold' });
+    this.updateObservable(new PitchPlayerCard('', 'Trent A-A', 'ST', 78, 'gold'));
   }
 
   click2() {
