@@ -1,9 +1,9 @@
 # Player Card
 
-![Dependencies](https://img.shields.io/david/jcbcn/pitch-player-card.svg)
-![GitHub issues](https://img.shields.io/github/issues/jcbcn/pitch-player-card.svg)
-![GitHub repo size](https://img.shields.io/github/repo-size/jcbcn/pitch-player-card.svg)
-![GitHub](https://img.shields.io/github/license/jcbcn/pitch-player-card.svg)
+![Dependencies](https://img.shields.io/david/pitch-game/pitch-player-card.svg)
+![GitHub issues](https://img.shields.io/github/issues/pitch-game/pitch-player-card.svg)
+![GitHub repo size](https://img.shields.io/github/repo-size/pitch-game/pitch-player-card.svg)
+![GitHub](https://img.shields.io/github/license/pitch-game/pitch-player-card.svg)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.2.
 
