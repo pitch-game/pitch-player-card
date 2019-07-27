@@ -1,4 +1,4 @@
-# Player Card
+# Pitch Player Card
 
 [![Downloads](https://img.shields.io/npm/dt/pitch-player-card)](https://www.npmjs.com/package/pitch-player-card)
 ![Dependencies](https://img.shields.io/david/pitch-game/pitch-player-card.svg)
