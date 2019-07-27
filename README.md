@@ -9,8 +9,10 @@
 
 ![](images/ppc.gif)
 
-## Installation
-```npm i pitch-player-card```
+## Install
+```
+npm i pitch-player-card
+```
 ```
   import { PitchPlayerCardModule } from 'pitch-player-card'
   imports: [
@@ -18,7 +20,9 @@
   ]
 ```
 ## Usage
-``` <pitch-player-card [card]="card" size="lg" mode="squad" spinOnInit="false"></pitch-player-card> ```
+```
+<pitch-player-card [card]="card" size="lg" mode="squad" spinOnInit="false"></pitch-player-card>
+```
 
 ---
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.2.
