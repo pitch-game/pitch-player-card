@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
   }
 
   title = 'demo';
-  card: PitchPlayerCard = { id: '', name: 'Mane', rating: 78, position: 'ST', rarity: 'gold' };
+  card: PitchPlayerCard = { id: '', name: 'Mane', rating: 84, position: 'ST', rarity: 'gold' };
   noCard: PitchPlayerCard;
   updateObservable;
 
@@ -32,12 +32,12 @@ export class AppComponent implements OnInit {
   cardsTest: { [position: string]: PitchPlayerCard } = {};
 
   click() {
-    this.updateObservable(new PitchPlayerCard('', 'Trent A-A', 'ST', 78, 'gold'));
-    this.cardsTest['LB'] = new PitchPlayerCard('', 'Trent A-A', 'ST', 78, 'gold');
+    this.updateObservable(new PitchPlayerCard('', 'Trent A-A', 'RB', 86, 'gold'));
+    this.cardsTest['LB'] = new PitchPlayerCard('', 'Trent A-A', 'RB', 86, 'gold');
   }
 
   click2() {
-    this.noCard = new PitchPlayerCard('', 'Trent A-A', 'ST', 78, 'gold');
+    this.noCard = new PitchPlayerCard('', 'Trent A-A', 'RB', 86, 'gold');
   }
 
   setnull(){
