@@ -5,6 +5,10 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/pitch-game/pitch-player-card.svg)
 ![GitHub](https://img.shields.io/github/license/pitch-game/pitch-player-card.svg)
 
+<center>
+    <img src="images/ppc.gif"/>
+</center>
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.2.
 
 ## Development server
