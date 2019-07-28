@@ -10,15 +10,20 @@
 ![](images/ppc.gif)
 
 ## Install
-```
-npm i pitch-player-card
-```
+```npm i pitch-player-card```
 ```
   import { PitchPlayerCardModule } from 'pitch-player-card'
   imports: [
     PitchPlayerCardModule,
   ]
 ```
+
+## Dependencies
+
+```npm i angular-fittext```
+
+```npm i animejs```
+
 ## Usage
 ```
 <pitch-player-card [card]="card" size="lg" mode="squad" spinOnInit="false"></pitch-player-card>
