@@ -1,21 +1,18 @@
-import { Component, OnInit, Input, AfterViewInit, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
 import { PitchPlayerCard } from '../models/pitch-player-card';
-import anime from 'animejs';
 import { Observable, isObservable } from 'rxjs';
+import { AnimationService } from 'src/services/animation.service';
 
 var nextId = 0;
 @Component({
     selector: "pitch-player-card",
     templateUrl: "player-card.component.html",
-    styleUrls: ["player-card.component.less"]
+    styleUrls: ["player-card.component.less"],
+    providers: [AnimationService]
 })
 export class PlayerCardComponent implements OnInit, OnChanges, AfterViewInit {
 
-    ngAfterViewInit(): void {
-        if (this.spinOnInit) {
-            this.click();
-        }
-    }
+    constructor(private animationService: AnimationService) { }
 
     @Input()
     card: Observable<PitchPlayerCard> | PitchPlayerCard;
@@ -30,9 +27,6 @@ export class PlayerCardComponent implements OnInit, OnChanges, AfterViewInit {
     cardModel: PitchPlayerCard;
 
     id = `pitch-player-${nextId++}`;
-
-    private revealing: boolean;
-    private spinningTimeline: any;
 
     ngOnInit(): void {
         if (!isObservable(this.card)) {
@@ -50,7 +44,7 @@ export class PlayerCardComponent implements OnInit, OnChanges, AfterViewInit {
         }
     }
 
-    ngOnChanges(changes: import("@angular/core").SimpleChanges): void {
+    ngOnChanges(changes: SimpleChanges): void {
         if (!isObservable(this.card)) {
             this.cardModel = this.card;
             if (!this.card) {
@@ -65,48 +59,30 @@ export class PlayerCardComponent implements OnInit, OnChanges, AfterViewInit {
         }
     }
 
-    reveal() {
-        if (this.spinningTimeline) {
-            this.spinningTimeline.pause();
+    ngAfterViewInit(): void {
+        if (this.spinOnInit) {
+            this.click();
         }
-        this.revealing = true;
-        anime.timeline({
-            loop: false
-        })
-            .add({ targets: [`#${this.id}.player`], rotateY: [{ value: 2520, duration: 4000 }], easing: 'easeOutCubic' }, 0)
-            .add({ targets: [`#${this.id} .cover`], opacity: [{ value: 0, duration: 3000 }], easing: 'linear' }, 0)
-            .finished.then(() => {
-                //race condition
-                anime.timeline({
-                    loop: false
-                })
-                    .add({ targets: [`#${this.id} .position`], opacity: [{ value: 100, duration: 1000 }] }, 0)
-                    .add({ targets: [`#${this.id} .rating`], opacity: [{ value: 100, duration: 1000 }] }, '+=150')
-                    .add({ targets: [`#${this.id} .name`], opacity: [{ value: 100, duration: 1000 }] }, '+=500').finished.then(() => {
-                        this.revealing = false;
-                    })
-            });
-    }
-
-    open() {
-        return anime.timeline({
-            loop: false
-        }).add({ targets: [`#${this.id} .ribbon`], translateX: [{ value: -250, duration: 150 }], opacity: [{ value: 0, duration: 100 }], easing: 'linear' }, 0)
-            .add({ targets: [`#${this.id} .ribbon`], opacity: [{ value: 0, duration: 150 }], easing: 'linear' }, 0)
-    }
-
-    spin() {
-        this.spinningTimeline = anime.timeline({
-            loop: true
-        }).add({ targets: [`#${this.id}.player`], rotateY: [{ value: 2520, duration: 4000 }], easing: 'easeOutCubic' });
     }
 
     click() {
         if (this.opened || this.mode == "squad") return;
         this.open().finished.then(() => {
-            if (this.revealing) return;
+            if (this.animationService.revealing) return;
             this.spin();
         });
+    }
+
+    reveal() {
+        this.animationService.reveal(this.id);
+    }
+
+    open(): any {
+        return this.animationService.open(this.id);
+    }
+
+    spin() {
+        this.animationService.spin(this.id);
     }
 
     maxFontSize(): number {
