@@ -12,3 +12,4 @@ import { AngularFittextModule } from 'angular-fittext';
 export class PitchPlayerCardModule { }
 
 export { PitchPlayerCard } from './models/pitch-player-card';
+export { AnimationService } from './services/animation.service';
