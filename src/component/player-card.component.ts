@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
 import { PitchPlayerCard } from '../models/pitch-player-card';
 import { Observable, isObservable } from 'rxjs';
-import { AnimationService } from 'src/services/animation.service';
+import { AnimationService } from '../services/animation.service';
 
 var nextId = 0;
 @Component({
