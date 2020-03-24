@@ -10,7 +10,6 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "preserveSymlinks": true,
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
             "tsConfig": "src/tsconfig.lib.json",
