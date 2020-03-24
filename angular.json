@@ -10,6 +10,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
+          "preserveSymlinks": true,
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
             "tsConfig": "src/tsconfig.lib.json",
@@ -48,6 +49,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "preserveSymlinks": true,
             "outputPath": "dist/demo",
             "index": "demo/src/index.html",
             "main": "demo/src/main.ts",

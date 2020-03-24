@@ -6,6 +6,7 @@
         <div class="shield cover absolute z-10"></div>
     </div>
     <div class="shield {{cardModel?.rarity}}" [ngClass]="{'opened' : opened}">
+        <div *ngIf="cardModel" class="shield fitness absolute z-10" [style.height.%]="100 - cardModel?.fitness"></div>
         <div class="text-container" *ngIf="cardModel">
             <div class="position">
                 <div fittext>{{cardModel?.position}}</div>
